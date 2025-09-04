@@ -138,9 +138,9 @@ build/
 dist/
 
 # Package manager files
-package-lock.json
-yarn.lock
-pnpm-lock.yaml
+#package-lock.json
+#yarn.lock
+#pnpm-lock.yaml
 
 # Local development files
 *.local
