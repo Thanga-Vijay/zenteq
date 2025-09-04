@@ -19,6 +19,7 @@ jobs:
   test_build:
     name: Test & Build
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     steps:
       - name: Checkout
@@ -27,20 +28,24 @@ jobs:
       - name: Use Node
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ env.NODE_VERSION }}
+          node-version: '20'
           cache: 'npm'
 
       - name: Install deps
         run: npm ci
+        timeout-minutes: 5
 
       - name: Lint
         run: npm run lint
+        timeout-minutes: 3
 
       - name: Typecheck
         run: npm run typecheck
+        timeout-minutes: 3
 
       - name: Build
         run: npm run build
+        timeout-minutes: 5
 
       - name: Upload site artifact
         uses: actions/upload-artifact@v4
@@ -55,6 +60,7 @@ jobs:
     needs: test_build
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
+    timeout-minutes: 15
 
     steps:
       - name: Download site artifact
@@ -76,12 +82,14 @@ jobs:
             --cache-control max-age=31536000,public \
             --metadata-directive REPLACE
         # For index.html / assets cache split, you can do targeted headers if needed.
+        timeout-minutes: 5
 
       - name: Invalidate CloudFront
         run: |
           aws cloudfront create-invalidation \
             --distribution-id ${{ env.CLOUDFRONT_DISTRIBUTION_ID }} \
             --paths "/*"
+        timeout-minutes: 5
 
       - name: Post summary
         run: |
