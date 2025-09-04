@@ -12,8 +12,8 @@ permissions:
 env:
   NODE_VERSION: 20
   AWS_REGION: ap-south-1
-  S3_BUCKET: zenteq-in-site            # <-- set your bucket name
-  CLOUDFRONT_DISTRIBUTION_ID: EXXXXXXXXXXXX # <-- set your distribution id
+  S3_BUCKET: zenteq-in           # <-- set your bucket name
+  CLOUDFRONT_DISTRIBUTION_ID: E22EM237DISGG1 # <-- set your distribution id
 
 jobs:
   test_build:
