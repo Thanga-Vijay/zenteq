@@ -1,0 +1,474 @@
+Got it. Let’s replace your Pricing section with a **“Flexible Engagement Models”** block that’s fully **dark/light mode ready** using your palette: **#1D3557 (navy), #F1F5F9 (light gray), #10B981 (green)**.
+
+Below you’ll get:
+
+1. Ready-to-use copy
+2. Tailwind theme tokens for light/dark
+3. Drop-in React components (Next.js + Tailwind)
+4. How to enable dark mode (with `next-themes`)
+
+---
+
+# 1) Website Copy (drop in as content)
+
+### Section: Flexible Engagement Models
+
+**Headline:** Flexible Solutions for Every Stage of Your Startup
+**Subtext:** From fast MVPs to scalable platforms, we tailor scope, team, and timelines to your runway and goals.
+
+**Models**
+
+* **Fixed Project** – Clear scope, fixed timeline, milestone-based delivery. Great for MVPs and redesigns.
+* **Dedicated Team** – A cross-functional squad that works as your in-house extension. Flexible capacity each sprint.
+* **Retainer Support** – Monthly DevOps & maintenance with guaranteed SLAs, monitoring, and on-call support.
+
+**What You Get**
+
+* Transparent weekly demos & reports
+* Clean code, tested CI/CD, IaC
+* Security & scalability by design (AWS/K8s)
+
+**CTA:** Get a Free Consultation
+
+---
+
+### Section: Why Work With Zenteq
+
+* 🚀 **Faster to Market** – Ship MVPs in weeks, not months.
+* 💸 **Cost-Efficient Infra** – Right-sized architecture reduces spend.
+* 🔒 **Secure & Compliant** – OWASP, least-privilege, IaC discipline.
+* 📈 **Built to Scale** – Stateless services, autoscaling, robust observability.
+
+**CTA:** Talk to an Expert
+
+---
+
+### Section: Free Startup Audit (Lead Magnet)
+
+A free 30-minute session + a quick architecture/readiness checklist tailored to your stage.
+**CTA:** Book Your Free Audit
+
+---
+
+# 2) Tailwind theme tokens (light + dark)
+
+`tailwind.config.ts`
+
+```ts
+import type { Config } from "tailwindcss"
+
+export default {
+  darkMode: ["class"],
+  theme: {
+    extend: {
+      colors: {
+        brand: {
+          navy: "#1D3557",
+          surface: "#F1F5F9",
+          green: "#10B981",
+          // neutrals
+          black: "#000000",
+          white: "#FFFFFF",
+        }
+      },
+    },
+  },
+  plugins: [],
+} satisfies Config
+```
+
+`globals.css` – CSS variables that flip in dark mode:
+
+```css
+:root {
+  --bg: #ffffff;
+  --surface: #F1F5F9;  /* subtle section/card bg */
+  --text: #0b1220;     /* near-black */
+  --muted: #475569;    /* slate-600-ish */
+  --brand-navy: #1D3557;
+  --brand-green: #10B981;
+  --ring: #10B981;
+}
+
+.dark {
+  --bg: #0b1220;       /* deep slate/ink */
+  --surface: #111827;  /* near-neutral dark surface */
+  --text: #e5e7eb;     /* light text */
+  --muted: #94a3b8;    /* slate-400-ish */
+  --brand-navy: #1D3557; /* keep brand constant */
+  --brand-green: #10B981;
+  --ring: #10B981;
+}
+
+body { background-color: var(--bg); color: var(--text); }
+```
+
+Handy utility classes:
+
+```css
+.bg-surface { background-color: var(--surface); }
+.text-muted { color: var(--muted); }
+.btn-primary {
+  @apply inline-flex items-center justify-center rounded-xl px-5 py-3 font-medium;
+  background: var(--brand-green); color: var(--bg);
+}
+.btn-primary:hover { filter: brightness(0.95); }
+.btn-secondary {
+  @apply inline-flex items-center justify-center rounded-xl px-5 py-3 font-medium border;
+  border-color: var(--brand-navy); color: var(--brand-navy);
+}
+```
+
+---
+
+# 3) Drop-in components (Next.js + Tailwind)
+
+### Engagement Models
+
+```tsx
+// components/EngagementModels.tsx
+export default function EngagementModels() {
+  const cards = [
+    {
+      title: "Fixed Project",
+      body: "Clear scope, fixed timeline, milestone-based delivery. Great for MVPs and redesigns.",
+    },
+    {
+      title: "Dedicated Team",
+      body: "A cross-functional squad that works as your in-house extension. Flexible capacity each sprint.",
+    },
+    {
+      title: "Retainer Support",
+      body: "Monthly DevOps & maintenance with SLAs, monitoring, and on-call support.",
+    },
+  ];
+  const bullets = [
+    "Transparent weekly demos & reports",
+    "Clean code, tested CI/CD, IaC",
+    "Security & scalability by design (AWS/K8s)"
+  ];
+
+  return (
+    <section className="py-20">
+      <div className="mx-auto max-w-6xl px-4">
+        <div className="text-center">
+          <h2 className="text-3xl md:text-4xl font-bold" style={{color:"var(--brand-navy)"}}>
+            Flexible Solutions for Every Stage of Your Startup
+          </h2>
+          <p className="mt-3 text-muted">
+            From fast MVPs to scalable platforms, we tailor scope, team, and timelines to your runway and goals.
+          </p>
+        </div>
+
+        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {cards.map((c) => (
+            <div key={c.title} className="bg-surface rounded-2xl p-6 shadow-sm border border-black/5 dark:border-white/10">
+              <h3 className="text-xl font-semibold">{c.title}</h3>
+              <p className="mt-2 text-muted">{c.body}</p>
+            </div>
+          ))}
+        </div>
+
+        <ul className="mt-8 grid gap-2 md:grid-cols-3 text-sm text-muted">
+          {bullets.map((b) => (<li key={b}>• {b}</li>))}
+        </ul>
+
+        <div className="mt-10 flex justify-center gap-4">
+          <a href="/contact" className="btn-primary">Get a Free Consultation</a>
+          <a href="/services" className="btn-secondary">View Services</a>
+        </div>
+      </div>
+    </section>
+  );
+}
+```
+
+### Why Work With Us
+
+```tsx
+// components/WhyZenteq.tsx
+const items = [
+  { title: "Faster to Market", body: "Ship MVPs in weeks, not months." },
+  { title: "Cost-Efficient Infra", body: "Right-sized architecture reduces spend." },
+  { title: "Secure & Compliant", body: "OWASP, least-privilege, IaC discipline." },
+  { title: "Built to Scale", body: "Stateless services, autoscaling, observability." },
+];
+
+export default function WhyZenteq() {
+  return (
+    <section className="py-16 bg-surface">
+      <div className="mx-auto max-w-6xl px-4">
+        <h2 className="text-2xl md:text-3xl font-bold" style={{color:"var(--brand-navy)"}}>
+          Why Work With Zenteq
+        </h2>
+        <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {items.map((i) => (
+            <div key={i.title} className="rounded-2xl p-6 border border-black/5 dark:border-white/10 bg-[var(--bg)]">
+              <h3 className="font-semibold">{i.title}</h3>
+              <p className="mt-2 text-muted">{i.body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+```
+
+### Free Audit CTA
+
+```tsx
+// components/FreeAuditCTA.tsx
+export default function FreeAuditCTA() {
+  return (
+    <section className="py-16">
+      <div className="mx-auto max-w-5xl px-4 rounded-3xl bg-surface border border-black/5 dark:border-white/10 p-10 text-center">
+        <h3 className="text-2xl font-bold" style={{color:"var(--brand-navy)"}}>
+          Free Startup Audit
+        </h3>
+        <p className="mt-2 text-muted">
+          A free 30-minute session + a quick architecture/readiness checklist tailored to your stage.
+        </p>
+        <div className="mt-6">
+          <a href="/contact" className="btn-primary">Book Your Free Audit</a>
+        </div>
+      </div>
+    </section>
+  );
+}
+```
+
+Use them on Home in order: `<EngagementModels />`, `<WhyZenteq />`, `<FreeAuditCTA />`.
+
+---
+
+# 4) Enable Dark Mode
+
+**Install & wire `next-themes`:**
+
+```bash
+pnpm add next-themes
+```
+
+`app/layout.tsx`
+
+```tsx
+import { ThemeProvider } from "next-themes";
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html suppressHydrationWarning>
+      <body>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          {children}
+        </ThemeProvider>
+      </body>
+    </html>
+  );
+}
+```
+
+**Add a theme toggle (optional):**
+
+```tsx
+// components/ThemeToggle.tsx
+"use client";
+import { useTheme } from "next-themes";
+
+export default function ThemeToggle() {
+  const { theme, setTheme } = useTheme();
+  const isDark = theme === "dark";
+  return (
+    <button
+      onClick={() => setTheme(isDark ? "light" : "dark")}
+      className="btn-secondary"
+      aria-label="Toggle theme"
+    >
+      {isDark ? "Light mode" : "Dark mode"}
+    </button>
+  );
+}
+```
+
+Place `<ThemeToggle />` in your header.
+
+---
+
+## What this gives you
+
+* A startup-friendly replacement for pricing that **converts better**
+* **Pixel-consistent** dark/light theming using your brand colors
+* Production-ready components you can drop in now
+
+
+For github actions
+---
+
+# 1) Next.js: enable static export
+
+In `next.config.ts`, add:
+
+```ts
+import type { NextConfig } from "next";
+const nextConfig: NextConfig = {
+  output: "export", // enables `next export` to /out (S3-friendly)
+};
+export default nextConfig;
+```
+
+Make sure you have these scripts in `package.json`:
+
+```json
+{
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "export": "next export",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "lint": "next lint"
+  }
+}
+```
+
+---
+
+# 2) GitHub Actions workflow (`.github/workflows/deploy.yml`)
+
+This pipeline:
+
+* Runs on push to `main`
+* Installs deps (pnpm), lints, typechecks, builds, exports static site
+* Uploads the exported site as an artifact
+* Assumes an AWS role via OIDC
+* Syncs to S3 and invalidates CloudFront
+
+```yaml
+name: CI & Deploy (S3 + CloudFront)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  id-token: write   # for OIDC
+  contents: read
+
+env:
+  NODE_VERSION: 20
+  AWS_REGION: ap-south-1
+  S3_BUCKET: zenteq-in-site            # <-- set your bucket name
+  CLOUDFRONT_DISTRIBUTION_ID: EXXXXXXXXXXXX # <-- set your distribution id
+
+jobs:
+  test_build:
+    name: Test & Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Install deps
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Build
+        run: pnpm build
+
+      - name: Export static site
+        run: pnpm export
+
+      - name: Upload site artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: out
+          if-no-files-found: error
+          retention-days: 7
+
+  deploy:
+    name: Deploy to S3 + Invalidate CloudFront
+    needs: test_build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Download site artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: site
+          path: site
+
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/${{ secrets.AWS_OIDC_ROLE_NAME }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Sync to S3
+        run: |
+          aws s3 sync site/ s3://${{ env.S3_BUCKET }} \
+            --delete \
+            --cache-control max-age=31536000,public \
+            --metadata-directive REPLACE
+        # For index.html / assets cache split, you can do targeted headers if needed.
+
+      - name: Invalidate CloudFront
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ env.CLOUDFRONT_DISTRIBUTION_ID }} \
+            --paths "/*"
+
+      - name: Post summary
+        run: |
+          echo "✅ Deployed to s3://${{ env.S3_BUCKET }} and invalidated CloudFront ${{
+            env.CLOUDFRONT_DISTRIBUTION_ID }}" >> $GITHUB_STEP_SUMMARY
+```
+
+> If you prefer **npm** over pnpm, swap setup steps and `pnpm` commands accordingly.
+
+---
+
+
+# 5) Optional: Smarter caching & headers
+
+To keep HTML fresh but cache assets long:
+
+* Upload assets (`_next`, images, css, js) with `--cache-control max-age=31536000,immutable`
+* Upload `index.html` and other HTML with `--cache-control no-cache`
+
+  * This requires two sync passes or `aws s3 cp` with `--content-type` targeting. You can refine later.
+
+---
+
+# 6) Test locally before first deploy
+
+```bash
+pnpm install
+pnpm lint
+pnpm typecheck
+pnpm build
+pnpm export
+# preview export (any static server)
+npx serve out
+```
+
+---
+
+That’s it. Push to **main** → CI runs → if all good, it deploys to **S3** and invalidates **CloudFront**.

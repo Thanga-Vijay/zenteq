@@ -1,0 +1,204 @@
+---
+
+You are an expert full-stack engineer + UI/UX designer.
+**Goal:** Create a production-ready marketing website for **Zenteq Pvt. Ltd.** at **zenteq.in** with clean, modern, trustworthy design.
+
+## 0) Tech Stack & Standards
+
+* **Framework:** Next.js 14+ (App Router) with **TypeScript**
+* **Styling:** Tailwind CSS + CSS variables
+* **UI Library:** shadcn/ui (Button, Card, Badge, Input, Textarea, Accordion, Navigation Menu)
+* **Icons:** lucide-react
+* **Fonts:** Inter (body), Poppins (headings) via `next/font/google`
+* **State:** Minimal client state; prefer server components
+* **Forms:** `react-hook-form` + `zod` validation
+* **Email/Contact:** server action using **Zoho Mail SMTP** (via `nodemailer`)
+* **Analytics:** Placeholder for Plausible or GA4
+* **Deployment:** Vercel-ready; also works via `next build && next start`
+* **Performance & A11y:** Aim **Lighthouse ≥ 95** (perf/SEO/a11y/best practices), WCAG AA contrast
+
+## 1) Brand & Visual System
+
+* **Colors (lock as Tailwind custom theme):**
+
+  * Navy (primary): `#1D3557`
+  * Light Gray (surface): `#F1F5F9`
+  * Accent Green (cta): `#10B981`
+  * Black `#000000`, White `#FFFFFF`
+* **Use:** Navy for headers/nav, Light Gray for sections/cards backgrounds, Green for CTAs/links/hover accents.
+* **Logo:** Placeholder SVG for wordmark “Zenteq” + “Z” icon; include both light/dark variants.
+* **Motion:** Subtle framer-motion on hero callouts and cards (reduced-motion respected).
+
+## 2) Site Structure (App Router)
+
+Create pages (route segments) and components:
+
+```
+/
+  - Home page
+/services
+  - Web App Development
+  - Mobile App Development
+  - Backend & APIs
+  - DevOps Architecture & Support
+/about
+/contact
+/privacy
+/terms
+```
+
+### Global Components
+
+* **Header/Nav** (sticky, mobile drawer)
+* **Footer** (links, social icons, copyright)
+* **Hero** (headline, subheadline, primary CTA)
+* **CTA Banner** (reusable)
+* **ServiceCard** (icon, title, bullets, CTA)
+* **Testimonial** (placeholder data)
+* **ProcessTimeline** (3 phases: Pre-Sales → Development → Delivery & Support)
+* **PricingBands** (range cards; INR)
+* **ContactForm** (name, email, company, service select, message; server action; zod validation; success/error states; honeypot)
+
+## 3) Copywriting (Use this exact content)
+
+**Company Name:** Zenteq Pvt. Ltd.
+**Tagline:** “Scalable Web, Mobile & DevOps Solutions.”
+**Short Bio:** “We help startups and SMEs build modern web and mobile apps with rock-solid DevOps. From MVP to scale, we deliver fast, secure, and reliable solutions.”
+**Services (bullets):**
+
+* **Web App Development** — React.js, Angular, Next.js
+* **Frontend Development** — Modern UI/UX, responsive, accessibility-first
+* **Backend & APIs** — Node.js, Django, Spring Boot, FastAPI
+* **Mobile Apps** — Flutter, React Native
+* **DevOps Architecture & Support** — AWS, Docker, Kubernetes, CI/CD, Terraform, Ansible
+
+**Pricing (INR ranges; show “Starting at” ranges, note “custom per scope”):**
+
+* Web App: ₹1,50,000 – ₹8,00,000
+* Mobile App: ₹2,00,000 – ₹12,00,000
+* Backend/API: ₹1,00,000 – ₹5,00,000
+* DevOps Setup: ₹75,000 – ₹4,00,000
+* DevOps Retainer: ₹60,000 – ₹2,50,000 / month
+
+**Process (3 steps):**
+
+1. **Pre-Sales:** Requirements, proposal (timeline + cost + deliverables), NDA, 20–30% advance.
+2. **Development:** Trello for tasks, Zoho Cliq updates, GitHub PR reviews, weekly demos.
+3. **Delivery & Support:** Deploy, docs handover, 30 days free support, AMC/retainer.
+
+**Primary CTA:** “Get a Free Consultation” → opens `/contact` and scrolls to form
+**Secondary CTA:** “View Services”
+
+**Trust Points:**
+
+* Secure by design (OWASP, least privilege, IaC)
+* Observable (logs, metrics, dashboards)
+* Scalable infra on AWS/K8s
+* Transparent weekly demos & reports
+
+**Footer:**
+
+* Email: `contact@zenteq.in`
+* Location: India
+* Social: Instagram & X (placeholders)
+* Copyright: `© ${currentYear} Zenteq Pvt. Ltd. All rights reserved.`
+
+## 4) SEO, Meta & Assets
+
+* **`metadata` in Next.js** for title, description, OpenGraph, Twitter cards.
+* **og\:image** static generation (simple banner with logo + colors).
+* **favicons** and app icons (using “Z” icon).
+* **`/sitemap.xml`** and **`/robots.txt`**.
+* **Schema.org JSON-LD:** `Organization`, `WebSite`, and `Service` for each service.
+
+## 5) Contact Form — Server Action (Zoho Mail)
+
+* Build a server action `sendContactEmail()` using `nodemailer`.
+* Read SMTP from env:
+
+  * `ZOHO_HOST`, `ZOHO_PORT`, `ZOHO_SECURE=true/false`, `ZOHO_USER`, `ZOHO_PASS`, `CONTACT_TO=contact@zenteq.in`
+* Validate with **zod**; show inline errors.
+* Anti-spam: hidden honeypot field + simple server-side time-based check.
+
+## 6) Tailwind Theme Setup
+
+* Extend theme with CSS variables mapped to brand colors.
+* Provide utility classes: `btn-primary` (green), `btn-secondary` (navy outline), `card-surface` (light gray bg), `heading`, `subtle`.
+
+## 7) Example Sections (Home)
+
+* **Hero:** Navy background, bold headline, subheadline, primary green CTA, secondary link.
+* **Services Grid:** 3–5 cards with icons (web, mobile, backend, devops).
+* **Why Zenteq:** 4 badges (Trust, Speed, Scalability, Support).
+* **Process Timeline:** 3 steps with brief descriptions.
+* **Pricing Bands:** Ranges with “Get a Quote” buttons.
+* **CTA Banner:** Encouragement line + CTA.
+* **Footer:** Links + socials.
+
+## 8) Accessibility & UX
+
+* Keyboard navigable, focus outlines, aria labels on icons, skip-to-content link.
+* Dark-mode compatible (optional); ensure contrast meets WCAG AA.
+
+## 9) Project Scaffolding & Scripts
+
+* Provide `README.md` with:
+
+  * Setup, env sample `.env.local.example`
+  * Dev commands, build commands
+  * How to deploy to Vercel
+* **NPM Scripts:** `dev`, `build`, `start`, `lint`, `typecheck`, `format`
+* **Prettier + ESLint** configured for Next + TS + Tailwind
+* Add **simple CI** (GitHub Actions) for `typecheck`, `lint`, and `build`.
+
+## 10) Deliverables Checklist (must generate)
+
+1. Complete Next.js app with pages: Home, Services, About, Contact, Privacy, Terms
+2. Global navigation + footer
+3. Brand theme in Tailwind + tokens
+4. shadcn/ui components configured
+5. Responsive layout (mobile-first)
+6. Contact form with Zoho SMTP server action + toast success/error
+7. SEO: metadata, OG images, sitemap, robots, JSON-LD
+8. Favicon + app icons + logo placeholders (SVG)
+9. README, `.env.local.example`, GitHub Action for CI
+10. Placeholder analytics hook for Plausible/GA4
+
+## 11) Content to Use (verbatim where appropriate)
+
+**Hero Title:** “Scalable Web, Mobile & DevOps Solutions.”
+**Hero Subtitle:** “We help startups and SMEs ship modern, reliable products—faster. From MVP to scale, Zenteq delivers clean code, resilient infra, and measurable results.”
+**CTA Primary:** “Get a Free Consultation”
+**CTA Secondary:** “View Services”
+
+**Services Copy:**
+
+* **Web App Development:** “React, Angular, and Next.js applications with modern UI, accessibility, and performance baked in.”
+* **Mobile App Development:** “Cross-platform apps using Flutter and React Native for a polished, consistent experience.”
+* **Backend & APIs:** “Node.js, Django, Spring Boot, FastAPI—secure APIs, clean architecture, and robust data layers.”
+* **DevOps Architecture & Support:** “AWS, Docker, Kubernetes, CI/CD, Terraform, Ansible—automated, observable, and cost-efficient.”
+
+**Contact Page Intro:**
+“Tell us about your project and we’ll get back within one business day.”
+
+**Pricing Note:**
+“All pricing is custom based on scope, complexity, and team composition. Ranges shown are indicative.”
+
+## 12) Acceptance Criteria (don’t skip)
+
+* Builds with no TypeScript errors and no ESLint errors.
+* Lighthouse desktop ≥ 95 in all categories; mobile ≥ 90.
+* Form submits successfully in dev with test SMTP; shows accessible success/error states.
+* Works with JS disabled for basic content (progressive enhancement where feasible).
+* No layout shift on hero (reserve image space).
+
+## 13) After Generation — Provide
+
+* Exact commands to run locally:
+
+  * `pnpm install` (or npm/yarn; choose one and be consistent)
+  * `pnpm dev`
+* Steps to set envs in `.env.local` with sample values.
+* One-click Vercel deploy instructions.
+
+**Now generate the full codebase and files. If something is ambiguous, choose sensible defaults that match the brand and ship a runnable project.**
