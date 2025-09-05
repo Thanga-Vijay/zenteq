@@ -1,8 +1,9 @@
 name: CI & Deploy (S3 + CloudFront)
 
 on:
-  push:
-    branches: [main]
+  # Temporarily disabled - use deploy-simple.yml instead
+  # push:
+  #   branches: [main]
   workflow_dispatch:
 
 permissions:
