@@ -10,9 +10,10 @@ interface ServiceCardProps {
   features: string[]
   ctaText?: string
   ctaHref?: string
+  technologies?: string[]
 }
 
-export function ServiceCard({ icon: Icon, title, description, features, ctaText = "Learn More", ctaHref = "/services" }: ServiceCardProps) {
+export function ServiceCard({ icon: Icon, title, description, features, ctaText = "Learn More", ctaHref = "/services", technologies = [] }: ServiceCardProps) {
   return (
     <Card className="h-full flex flex-col">
       <CardHeader>
@@ -25,17 +26,29 @@ export function ServiceCard({ icon: Icon, title, description, features, ctaText 
         <CardDescription className="text-base">{description}</CardDescription>
       </CardHeader>
       <CardContent className="flex-1">
-        <ul className="space-y-2 mb-6">
+        <ul className="list-disc list-inside space-y-2 mb-6 text-sm text-gray-600">
           {features.map((feature, index) => (
-            <li key={index} className="flex items-start space-x-2">
-              <div className="w-1.5 h-1.5 bg-accent-green rounded-full mt-2 flex-shrink-0" />
-              <span className="text-sm text-gray-600">{feature}</span>
-            </li>
+            <li key={index}>{feature}</li>
           ))}
         </ul>
         <Button asChild variant="primary" className="w-full">
           <Link href={ctaHref}>{ctaText}</Link>
         </Button>
+        {technologies.length > 0 && (
+          <div className="mt-6">
+            <h4 className="text-sm font-semibold text-navy mb-3">Technologies:</h4>
+            <div className="flex flex-wrap gap-2">
+              {technologies.map((tech) => (
+                <span
+                  key={tech}
+                  className="inline-flex items-center rounded-full bg-accent-green/10 px-3 py-1 text-xs font-medium text-accent-green"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
       </CardContent>
     </Card>
   )

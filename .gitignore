@@ -174,3 +174,9 @@ storybook-static
 
 # Keep public assets
 !public/
+
+
+*.sh 
+*.zip
+*.txt
+*.tar.gz

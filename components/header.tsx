@@ -43,7 +43,7 @@ export function Header() {
             </Link>
           ))}
         </div>
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+        <div className="hidden lg:flex lg:flex-1 lg:justify-end items-center gap-3">
           <Button asChild variant="primary">
             <Link href="/contact">Get a Free Consultation</Link>
           </Button>

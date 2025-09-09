@@ -151,20 +151,8 @@ export default function ServicesPage() {
                   description={service.description}
                   features={service.features}
                   ctaHref={service.ctaHref}
+                  technologies={service.technologies}
                 />
-                <div className="mt-6">
-                  <h4 className="text-sm font-semibold text-navy mb-3">Technologies:</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {service.technologies.map((tech) => (
-                      <span
-                        key={tech}
-                        className="inline-flex items-center rounded-full bg-accent-green/10 px-3 py-1 text-xs font-medium text-accent-green"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
               </div>
             ))}
           </div>
@@ -193,12 +181,9 @@ export default function ServicesPage() {
                   <h3 className="text-lg font-semibold text-navy">{service.title}</h3>
                 </div>
                 <p className="text-gray-600 mb-4">{service.description}</p>
-                <ul className="space-y-2">
+                <ul className="list-disc list-inside space-y-2 text-sm text-gray-600">
                   {service.features.map((feature, index) => (
-                    <li key={index} className="flex items-start space-x-2 text-sm text-gray-600">
-                      <div className="w-1.5 h-1.5 bg-accent-green rounded-full mt-2 flex-shrink-0" />
-                      <span>{feature}</span>
-                    </li>
+                    <li key={index}>{feature}</li>
                   ))}
                 </ul>
               </div>

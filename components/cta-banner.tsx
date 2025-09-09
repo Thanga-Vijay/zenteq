@@ -9,9 +9,9 @@ interface CTABannerProps {
 }
 
 export function CTABanner({ 
-  title = "Ready to build something amazing?",
-  description = "Let's discuss your project and turn your vision into reality.",
-  ctaText = "Get Started Today",
+  title = "Ready to accelerate your roadmap?",
+  description = "Book a free 15‑minute consultation. Get timelines, costs, and a clear plan.",
+  ctaText = "Book a Free Consultation",
   ctaHref = "/contact"
 }: CTABannerProps) {
   return (

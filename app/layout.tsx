@@ -158,9 +158,11 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.className} antialiased`}>
-        <div className="min-h-screen flex flex-col">
+        {/* Skip link for accessibility */}
+        <a href="#main" className="skip-link">Skip to main content</a>
+        <div className="min-h-screen flex flex-col bg-white text-gray-900">
           <Header />
-          <main className="flex-1">
+          <main id="main" className="flex-1">
             {children}
           </main>
           <Footer />

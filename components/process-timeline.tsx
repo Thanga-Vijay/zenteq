@@ -3,35 +3,35 @@ import { CheckCircle } from 'lucide-react'
 const steps = [
   {
     id: 1,
-    title: 'Pre-Sales',
-    description: 'Requirements, proposal (timeline + cost + deliverables), NDA, 20–30% advance.',
+    title: 'Discover',
+    description: 'Align on goals, scope, and success metrics. Clear plan and estimates upfront.',
     details: [
-      'Requirements gathering and analysis',
-      'Detailed proposal with timeline and cost',
-      'Non-disclosure agreement',
-      'Project kickoff with advance payment'
+      'Workshops to clarify objectives',
+      'Timeline, scope, and budget agreement',
+      'Risk and architecture outline',
+      'NDA and kickoff'
     ]
   },
   {
     id: 2,
-    title: 'Development',
-    description: 'Trello for tasks, Zoho Cliq updates, GitHub PR reviews, weekly demos.',
+    title: 'Build',
+    description: 'Agile sprints with weekly demos. Code reviews and CI/CD from day one.',
     details: [
-      'Agile development with Trello task management',
-      'Regular updates via Zoho Cliq',
-      'Code review through GitHub PRs',
-      'Weekly demo sessions for feedback'
+      'Design → Implement → Review (sprint loops)',
+      'Automated testing and CI/CD pipelines',
+      'Weekly demos and feedback incorporation',
+      'Transparent progress tracking'
     ]
   },
   {
     id: 3,
-    title: 'Delivery & Support',
-    description: 'Deploy, docs handover, 30 days free support, AMC/retainer.',
+    title: 'Launch & Grow',
+    description: 'Production rollout, monitoring, and ongoing optimization with a success plan.',
     details: [
-      'Production deployment and testing',
-      'Documentation and knowledge transfer',
-      '30 days free support period',
-      'Annual maintenance contract options'
+      'Release checklist and go‑live support',
+      'Observability (logs, metrics, alerts)',
+      '30‑day warranty and handover docs',
+      'Retainer or AMC for continuous growth'
     ]
   }
 ]

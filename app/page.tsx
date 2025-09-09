@@ -5,6 +5,8 @@ import { ProcessTimeline } from '@/components/process-timeline'
 import { EngagementModels } from '@/components/engagement-models'
 import { ValueProposition } from '@/components/value-proposition'
 import { CTABanner } from '@/components/cta-banner'
+import { Testimonials } from '@/components/testimonials'
+import { StickyCTA } from '@/components/sticky-cta'
 import { 
   Globe, 
   Smartphone, 
@@ -25,28 +27,28 @@ const services = [
   {
     icon: Globe,
     title: 'Web App Development',
-    description: 'React, Angular, and Next.js applications with modern UI, accessibility, and performance baked in.',
+    description: 'Build lightning-fast, SEO-friendly web apps with React, Angular, or Next.js.',
     features: ['React.js, Angular, Next.js', 'Modern UI/UX', 'Responsive design', 'Accessibility-first'],
     ctaHref: '/services#web-app'
   },
   {
     icon: Smartphone,
     title: 'Mobile App Development',
-    description: 'Cross-platform apps using Flutter and React Native for a polished, consistent experience.',
+    description: 'Launch polished cross-platform apps using Flutter or React Native—native feel, faster delivery.',
     features: ['Flutter, React Native', 'Cross-platform development', 'Native performance', 'App store deployment'],
     ctaHref: '/services#mobile-app'
   },
   {
     icon: Server,
     title: 'Backend & APIs',
-    description: 'Node.js, Django, Spring Boot, FastAPI—secure APIs, clean architecture, and robust data layers.',
+    description: 'Secure APIs and clean architectures with Node.js, Django, Spring Boot, or FastAPI.',
     features: ['Node.js, Django, Spring Boot', 'Secure APIs', 'Clean architecture', 'Robust data layers'],
     ctaHref: '/services#backend'
   },
   {
     icon: Cloud,
     title: 'DevOps Architecture & Support',
-    description: 'AWS, Docker, Kubernetes, CI/CD, Terraform, Ansible—automated, observable, and cost-efficient.',
+    description: 'Automated AWS/Kubernetes infrastructure with CI/CD, Terraform, and observability built-in.',
     features: ['AWS, Docker, Kubernetes', 'CI/CD pipelines', 'Terraform, Ansible', 'Monitoring & logging'],
     ctaHref: '/services#devops'
   }
@@ -85,10 +87,10 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-3xl font-bold tracking-tight text-navy sm:text-4xl">
-              Our Services
+              Services that move your product forward
             </h2>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              We help startups and SMEs build modern web and mobile apps with rock-solid DevOps. From MVP to scale, we deliver fast, secure, and reliable solutions.
+              From MVP to scale, we deliver fast, secure, and reliable solutions across web, mobile, backend, and DevOps.
             </p>
           </div>
           
@@ -134,9 +136,11 @@ export default function HomePage() {
       </section>
 
       <ProcessTimeline />
-              <ValueProposition />
-        <EngagementModels />
-        <CTABanner />
+      <ValueProposition />
+      <EngagementModels />
+      <Testimonials />
+      <CTABanner />
+      <StickyCTA />
     </>
   )
 }
